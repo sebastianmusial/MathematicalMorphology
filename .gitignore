@@ -1,3 +1,6 @@
 .idea
 out
 img_saved
+*.iml
+build/
+.gradle/

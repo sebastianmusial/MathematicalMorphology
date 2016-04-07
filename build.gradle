@@ -1,0 +1,17 @@
+buildscript {
+    dependencies {
+        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.4.1'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'javafx-gradle-plugin'
+
+jfx {
+    verbose = true
+    mainClass = "pl.polsl.mathematicalMorphology.Main"
+}
