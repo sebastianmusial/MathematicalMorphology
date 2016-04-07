@@ -1,4 +1,4 @@
-package mathematicalMorphology.test;
+package pl.polsl.mathematicalMorphology;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("main_view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("main_view.fxml"));
+        Parent root = fxmlLoader.load();
         primaryStage.setTitle("WKiRO - morfologia matematyczna dla obrazów kolorowych");
         primaryStage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT));
         primaryStage.show();

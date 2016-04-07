@@ -1,4 +1,4 @@
-package mathematicalMorphology.test;
+package pl.polsl.mathematicalMorphology;
 
 import javafx.fxml.FXML;
 import javafx.application.Platform;
