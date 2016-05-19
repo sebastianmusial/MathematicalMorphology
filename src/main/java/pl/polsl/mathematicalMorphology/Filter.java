@@ -4,12 +4,36 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.function.BiConsumer;
 
 /**
- * Negacja
+ * RGB to HSI filter
  */
+class RGB2HSI extends Filter {
+	public RGB2HSI() {
+		super("RGB2HSI", new int[][]{{1}});
+
+		pixelProcedure = (x, y) -> {
+			int color = source.getRGB(x, y);
+			dest.setRGB(x, y, rgb2hsi(color));
+		};
+	}
+
+	private int rgb2hsi(int rgb){
+		float[] hsi = new float[3];
+		int r = (rgb >> 16) & 0xFF;
+		int g = (rgb >> 8) & 0xFF;
+		int b = (rgb) & 0xFF;
+		Color.RGBtoHSB(r, g, b, hsi);
+		hsi[0] = (hsi[0]) * 250;
+		hsi[1] = (hsi[1]) * 250;
+		hsi[2] = (hsi[2]) * 250;
+		return (int)Math.round(hsi[0])*65536 + (int)Math.round(hsi[1])*256 + (int)Math.round(hsi[2]);
+	}
+}
+
 class Negate extends Filter {
 	public Negate() {
 		super("Negacja", new int[][]{{1}});

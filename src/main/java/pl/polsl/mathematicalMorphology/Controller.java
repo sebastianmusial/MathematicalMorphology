@@ -1,9 +1,9 @@
 package pl.polsl.mathematicalMorphology;
 
-import javafx.fxml.FXML;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,7 +11,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 
 import javax.imageio.ImageIO;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
 
 public class Controller {
@@ -110,7 +111,12 @@ public class Controller {
 	private void openFile(File source) {
 		String uri = source.toURI().toString();
 		System.out.println("opening: " + uri);
-		imgLeft.setImage(new Image(uri));
+
+        new RGB2HSI()
+            .withImage(new Image(uri))
+            .filter()
+            .setImage(imgLeft);
+
 		enableButtons(true);
 		resultsArea.setText("");
 		acceptIterator = 1;
@@ -118,8 +124,8 @@ public class Controller {
 
     private Optional<File> getFile() {
         FileChooser fileChooser = fileChooserSupplier.get();
-        File choosen = fileChooser.showOpenDialog(root.getScene().getWindow());
-        return Optional.ofNullable(choosen);
+        File chosen = fileChooser.showOpenDialog(root.getScene().getWindow());
+        return Optional.ofNullable(chosen);
     }
 
 	@FXML
