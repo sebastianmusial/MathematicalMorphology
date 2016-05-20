@@ -11,24 +11,8 @@ public final class Filters extends ArrayList<Filter> {
 	private static Filters filters;
 
 	private Filters() {
-		add(new Binarize());
 		add(new BinaryErosion());
-		add(new BinaryErosion2());
-		add(new BinaryErosion3());
 		add(new BinaryDilation());
-		add(new BinaryDilation2());
-		add(new Gauss5x5());
-		add(new Gauss3x3());
-		add(new BinaryScelet());
-		add(new Negate());
-		add(new Smooth());
-        add(new AllEdges());
-		add(new AllEdgesInverted());
-		add(new BinarySmooth7x7());
-		add(new HorizontalPrewitt());
-		add(new HorizontalSobel());
-		add(new VerticalPrewitt());
-		add(new VerticalSobel());
 	}
 
 	public static Filters getFilters() {
