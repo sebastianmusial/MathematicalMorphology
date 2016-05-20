@@ -11,8 +11,8 @@ public final class Filters extends ArrayList<Filter> {
 	private static Filters filters;
 
 	private Filters() {
-		add(new BinaryErosion());
-		add(new BinaryDilation());
+		add(new Erosion());
+		add(new Dilation());
 	}
 
 	public static Filters getFilters() {

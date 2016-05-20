@@ -6,12 +6,17 @@ import javafx.scene.image.ImageView;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.BiConsumer;
 
 /**
  * RGB to HSI filter
  */
 class RGB2HSI extends Filter {
+	float[][][] hsiValues;
+
 	public RGB2HSI() {
 		super("RGB2HSI", new int[][]{{1}});
 
@@ -37,8 +42,8 @@ class RGB2HSI extends Filter {
 	}
 }
 
-class BinaryErosion extends Filter {
-	public BinaryErosion() {
+class Erosion extends Filter {
+	public Erosion() {
 		super(
 				"Erozja",
 				new int[][]{
@@ -48,7 +53,6 @@ class BinaryErosion extends Filter {
 				}
 		);
 
-		imageType = BufferedImage.TYPE_BYTE_BINARY;
 		pixelProcedure = erosionPixelFilter;
 	}
 
@@ -60,8 +64,8 @@ class BinaryErosion extends Filter {
 	}
 }
 
-class BinaryDilation extends Filter {
-	public BinaryDilation() {
+class Dilation extends Filter {
+	public Dilation() {
 		super(
 				"Dylatacja",
 				new int[][]{
@@ -70,7 +74,6 @@ class BinaryDilation extends Filter {
 						{1, 1, 1}
 				}
 		);
-		imageType = BufferedImage.TYPE_BYTE_BINARY;
 		pixelProcedure = dilationPixelFilter;
 	}
 
@@ -100,57 +103,32 @@ public abstract class Filter {
 	private String name;
 	protected BiConsumer<Integer, Integer> pixelProcedure;
 
-	float[][][] hsiValues;
+	RGBHSIPixel[][] pixels;
 
 	/**
 	 * Sets current pixel's color to black if any of the masked pixels are black
 	 */
 	protected final BiConsumer<Integer, Integer> erosionPixelFilter = (x, y) -> {
-		int color = 0;
-		boolean setToBlack = false;
+		List<RGBHSIPixel> pixelsToConsider = new ArrayList<>();
 
 		for (int row = 0; row < filter.length; row++) {
 			for (int col = 0; col < filter[row].length; col++) {
-				color = source.getRGB(x - filterHalfWidth + col, y - filterHalfHeight + row);
-				//color >>= 16;
-				color &= 0xFF;
-				int mask = filter[row][col];
-				if (mask > 0 && color == 0) {
-					setToBlack |= true;
-				}
+                pixelsToConsider.add(pixels[x - filterHalfWidth + col][y - filterHalfHeight + row]);
 			}
 		}
-		if (setToBlack) {
-			color &= 0xFF000000;
-		} else {
-			color |= 0x00FFFFFF;
-		}
 
-		dest.setRGB(x, y, color);
+        dest.setRGB(x, y, Collections.min(pixelsToConsider, Formulas::comparePixels).getRgb());
 	};
 
 	protected final BiConsumer<Integer, Integer> dilationPixelFilter = (x, y) -> {
-		int color = 0;
-		boolean setToWhite = false;
+		List<RGBHSIPixel> pixelsToConsider = new ArrayList<>();
 
 		for (int row = 0; row < filter.length; row++) {
 			for (int col = 0; col < filter[row].length; col++) {
-				color = source.getRGB(x - filterHalfWidth + col, y - filterHalfHeight + row);
-				//color >>= 16;
-				color &= 0xFF;
-				int mask = filter[row][col];
-				if (mask > 0 && color > 0) {
-					setToWhite |= true;
-				}
+				pixelsToConsider.add(pixels[x - filterHalfWidth + col][y - filterHalfHeight + row]);
 			}
 		}
-		if (setToWhite) {
-			color |= 0x00FFFFFF;
-		} else {
-			color &= 0xFF000000;
-		}
-
-		dest.setRGB(x, y, color);
+		dest.setRGB(x, y, Collections.max(pixelsToConsider, Formulas::comparePixels).getRgb());
 	};
 
 	protected Filter(String name, int[][] filter) {
@@ -242,7 +220,15 @@ public abstract class Filter {
 	protected void calcHsiValues(){
 		RGB2HSI rgb2HSI = new RGB2HSI();
 		rgb2HSI.withImage(source).filter();
-		this.hsiValues = rgb2HSI.hsiValues;
+		float[][][] hsiValues = rgb2HSI.hsiValues;
+
+		pixels = new RGBHSIPixel[source.getWidth()][source.getHeight()];
+		for(int i = 0; i<source.getWidth(); ++i){
+			for(int j = 0; j<source.getHeight(); ++j){
+				pixels[i][j] = new RGBHSIPixel(hsiValues[i][j], source.getRGB(i, j));
+			}
+		}
+
 	}
 
 	@Override
