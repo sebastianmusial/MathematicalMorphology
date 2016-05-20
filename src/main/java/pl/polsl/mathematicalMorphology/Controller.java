@@ -112,10 +112,7 @@ public class Controller {
 		String uri = source.toURI().toString();
 		System.out.println("opening: " + uri);
 
-        new RGB2HSI()
-            .withImage(new Image(uri))
-            .filter()
-            .setImage(imgLeft);
+		imgLeft.setImage(new Image(uri));
 
 		enableButtons(true);
 		resultsArea.setText("");

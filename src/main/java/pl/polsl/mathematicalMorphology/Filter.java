@@ -16,21 +16,24 @@ class RGB2HSI extends Filter {
 		super("RGB2HSI", new int[][]{{1}});
 
 		pixelProcedure = (x, y) -> {
-			int color = source.getRGB(x, y);
-			dest.setRGB(x, y, rgb2hsi(color));
+			hsiValues[x][y] = rgb2hsi(source.getRGB(x, y));
 		};
 	}
 
-	private int rgb2hsi(int rgb){
+	@Override
+	protected Filter withImage(BufferedImage bufferedImage) {
+		Filter filter = super.withImage(bufferedImage);
+		hsiValues = new float[source.getWidth()][source.getHeight()][3];
+		return filter;
+	}
+
+	private float[] rgb2hsi(int rgb){
 		float[] hsi = new float[3];
 		int r = (rgb >> 16) & 0xFF;
 		int g = (rgb >> 8) & 0xFF;
 		int b = (rgb) & 0xFF;
 		Color.RGBtoHSB(r, g, b, hsi);
-		hsi[0] = (hsi[0]) * 250;
-		hsi[1] = (hsi[1]) * 250;
-		hsi[2] = (hsi[2]) * 250;
-		return (int)Math.round(hsi[0])*65536 + (int)Math.round(hsi[1])*256 + (int)Math.round(hsi[2]);
+		return hsi;
 	}
 }
 
@@ -48,6 +51,13 @@ class BinaryErosion extends Filter {
 		imageType = BufferedImage.TYPE_BYTE_BINARY;
 		pixelProcedure = erosionPixelFilter;
 	}
+
+	@Override
+	protected Filter withImage(BufferedImage bufferedImage) {
+		Filter filter = super.withImage(bufferedImage);
+		calcHsiValues();
+		return filter;
+	}
 }
 
 class BinaryDilation extends Filter {
@@ -62,6 +72,13 @@ class BinaryDilation extends Filter {
 		);
 		imageType = BufferedImage.TYPE_BYTE_BINARY;
 		pixelProcedure = dilationPixelFilter;
+	}
+
+	@Override
+	protected Filter withImage(BufferedImage bufferedImage) {
+		Filter filter = super.withImage(bufferedImage);
+		calcHsiValues();
+		return filter;
 	}
 }
 
@@ -82,6 +99,8 @@ public abstract class Filter {
 
 	private String name;
 	protected BiConsumer<Integer, Integer> pixelProcedure;
+
+	float[][][] hsiValues;
 
 	/**
 	 * Sets current pixel's color to black if any of the masked pixels are black
@@ -167,7 +186,11 @@ public abstract class Filter {
 	 * @return
 	 */
 	public Filter withImage(Image image) {
-		source = SwingFXUtils.fromFXImage(image, null);
+		return withImage(SwingFXUtils.fromFXImage(image, null));
+	}
+
+	protected Filter withImage(BufferedImage bufferedImage) {
+		source = bufferedImage;
 		createNewDest();
 		return this;
 	}
@@ -214,6 +237,12 @@ public abstract class Filter {
 		targetView.setImage(SwingFXUtils.toFXImage(source, null));
 		source = null;
 		dest = null;
+	}
+
+	protected void calcHsiValues(){
+		RGB2HSI rgb2HSI = new RGB2HSI();
+		rgb2HSI.withImage(source).filter();
+		this.hsiValues = rgb2HSI.hsiValues;
 	}
 
 	@Override
