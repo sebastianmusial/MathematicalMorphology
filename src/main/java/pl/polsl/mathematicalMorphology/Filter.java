@@ -113,7 +113,9 @@ public abstract class Filter {
 
 		for (int row = 0; row < filter.length; row++) {
 			for (int col = 0; col < filter[row].length; col++) {
-                pixelsToConsider.add(pixels[x - filterHalfWidth + col][y - filterHalfHeight + row]);
+				if(filter[row][col] == 1) {
+					pixelsToConsider.add(pixels[x - filterHalfWidth + col][y - filterHalfHeight + row]);
+				}
 			}
 		}
 
@@ -125,7 +127,9 @@ public abstract class Filter {
 
 		for (int row = 0; row < filter.length; row++) {
 			for (int col = 0; col < filter[row].length; col++) {
-				pixelsToConsider.add(pixels[x - filterHalfWidth + col][y - filterHalfHeight + row]);
+				if(filter[row][col] == 1) {
+					pixelsToConsider.add(pixels[x - filterHalfWidth + col][y - filterHalfHeight + row]);
+				}
 			}
 		}
 		dest.setRGB(x, y, Collections.max(pixelsToConsider, Formulas::comparePixels).getRgb());
@@ -189,7 +193,7 @@ public abstract class Filter {
 	}
 
 	protected final void filterImage() {
-		for (int row = filterHalfWidth; row < source.getHeight() - filterHalfWidth; row++) {
+		for (int row = filterHalfHeight; row < source.getHeight() - filterHalfHeight; row++) {
 			filterImageRow(row);
 		}
 		source = dest;
@@ -201,7 +205,7 @@ public abstract class Filter {
 	 * @param row index of the row to be filtered
 	 */
 	protected final void filterImageRow(int row) {
-		for (int col = filterHalfHeight; col < source.getWidth() - filterHalfHeight; col++) {
+		for (int col = filterHalfWidth; col < source.getWidth() - filterHalfWidth; col++) {
 			pixelProcedure.accept(col, row);
 		}
 	}
