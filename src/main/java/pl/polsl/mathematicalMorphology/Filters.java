@@ -11,8 +11,10 @@ public final class Filters extends ArrayList<Filter> {
 	private static Filters filters;
 
 	private Filters() {
-		add(new Erosion());
-		add(new Dilation());
+		add(new Erosion3x3());
+		add(new Erosion5x5());
+		add(new Dilation3x3());
+		add(new Dilation5x5());
 	}
 
 	public static Filters getFilters() {

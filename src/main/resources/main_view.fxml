@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.polsl.mathematicalMorphology.Controller">
@@ -49,7 +50,7 @@
                 </HBox>
             <HBox prefHeight="21.0" prefWidth="200.0">
                <children>
-                        <ComboBox fx:id="filterChooser">
+                        <ComboBox fx:id="filterChooser" prefHeight="25.0" prefWidth="154.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
@@ -68,6 +69,8 @@
               <rowConstraints>
                 <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+                  <RowConstraints minHeight="50.0" prefHeight="50.0" valignment="CENTER" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
                        <Button fx:id="btnAcceptFilter" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleAcceptFilter" prefHeight="25.0" prefWidth="165.0" text="Akceptuj" GridPane.rowIndex="1">
@@ -75,16 +78,24 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Button>
+                  <Slider fx:id="hrefSlider" max="360.0" prefHeight="72.0" prefWidth="235.0" showTickLabels="true" showTickMarks="true" style="-fx-padding: 20px 5px;" GridPane.rowIndex="3">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <GridPane.margin>
+                        <Insets bottom="40.0" />
+                     </GridPane.margin>
+                  </Slider>
                </children>
             </GridPane>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label fx:id="resultsLabel" text="Wykonane operacje:">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="30.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TextArea fx:id="resultsArea" minHeight="170.0" prefWidth="200.0">
+                  <TextArea fx:id="resultsArea" minHeight="120.0" prefWidth="200.0">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>

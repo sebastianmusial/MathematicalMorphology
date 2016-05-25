@@ -32,6 +32,8 @@ public class Controller {
     TextArea resultsArea;
     @FXML
     Label resultsLabel;
+	@FXML
+	Slider hrefSlider;
 
 	LazyLoad<FileChooser> fileChooserSupplier = new LazyLoad().withSupplier(() -> new FileChooser());
 	Filters filters = Filters.getFilters();
@@ -134,6 +136,7 @@ public class Controller {
         resultsLabel.setDisable(disable);
         btnSaveImage.setDisable(disable);
 		resultsArea.setDisable(disable);
+		hrefSlider.setDisable(disable);
 	}
 
 	@FXML
