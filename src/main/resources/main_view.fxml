@@ -78,7 +78,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </Button>
-                  <Slider fx:id="hrefSlider" max="360.0" prefHeight="72.0" prefWidth="235.0" showTickLabels="true" showTickMarks="true" style="-fx-padding: 20px 5px;" GridPane.rowIndex="3">
+                  <Slider fx:id="hrefSlider" max="6.28318530718" prefHeight="72.0" prefWidth="235.0" showTickLabels="true" showTickMarks="true" style="-fx-padding: 20px 5px;" GridPane.rowIndex="3">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

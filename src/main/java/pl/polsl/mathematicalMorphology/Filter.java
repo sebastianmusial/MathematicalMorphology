@@ -118,6 +118,8 @@ public abstract class Filter {
 
 	RGBHSIPixel[][] pixels;
 
+	private Formulas formulas;
+
 	/**
 	 * Sets current pixel's color to black if any of the masked pixels are black
 	 */
@@ -132,7 +134,7 @@ public abstract class Filter {
 			}
 		}
 
-        dest.setRGB(x, y, Collections.min(pixelsToConsider, Formulas::comparePixels).getRgb());
+        dest.setRGB(x, y, Collections.min(pixelsToConsider, formulas::comparePixels).getRgb());
 	};
 
 	protected final BiConsumer<Integer, Integer> dilationPixelFilter = (x, y) -> {
@@ -145,7 +147,7 @@ public abstract class Filter {
 				}
 			}
 		}
-		dest.setRGB(x, y, Collections.max(pixelsToConsider, Formulas::comparePixels).getRgb());
+		dest.setRGB(x, y, Collections.max(pixelsToConsider, formulas::comparePixels).getRgb());
 	};
 
 	protected Filter(String name, int[][] filter) {
@@ -199,7 +201,8 @@ public abstract class Filter {
 	 *
 	 * @return
 	 */
-	public Filter filter() {
+	public Filter filter(float hRef) {
+		formulas = new Formulas(hRef);
 		filterImage();
 		dest = null;
 		return this;
@@ -236,7 +239,7 @@ public abstract class Filter {
 
 	protected void calcHsiValues(){
 		RGB2HSI rgb2HSI = new RGB2HSI();
-		rgb2HSI.withImage(source).filter();
+		rgb2HSI.withImage(source).filter(0f);
 		float[][][] hsiValues = rgb2HSI.hsiValues;
 
 		pixels = new RGBHSIPixel[source.getWidth()][source.getHeight()];

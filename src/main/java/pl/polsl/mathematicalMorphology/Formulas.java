@@ -1,16 +1,16 @@
 package pl.polsl.mathematicalMorphology;
 
 public final class Formulas {
-    //TODO It should be possible to change Href in GUI
-    private static final float H_REF = 0f;
+    private final float hRef;
 
-    private Formulas() {
+    public Formulas(float hRef) {
+        this.hRef = hRef;
     }
 
     /**
-     * Forumula (11)
+     * Formula (11)
      */
-    public static int comparePixels(RGBHSIPixel pixel1, RGBHSIPixel pixel2) {
+    public int comparePixels(RGBHSIPixel pixel1, RGBHSIPixel pixel2) {
         int rgb1 = pixel1.getRgb();
         int rgb2 = pixel2.getRgb();
 
@@ -38,37 +38,37 @@ public final class Formulas {
     }
 
     /**
-     * Forumla (10)
+     * Formula (10)
      */
-    private static float cost(float h, float s, float i) {
+    private float cost(float h, float s, float i) {
         return s * normalizeHue(h) + (1 - s) * i;
     }
 
     /**
      * Formula (8)
      */
-    private static float normalizeHue(float hue) {
+    private float normalizeHue(float hue) {
         return distance(hue) / (float) Math.PI;
     }
 
     /**
      * Formula (5)
      */
-    private static float distance(float hue) {
-        float dist = Math.abs(hue - H_REF);
+    private float distance(float hue) {
+        float dist = Math.abs(hue - hRef);
         return (float) (dist <= Math.PI ? dist : 2f * Math.PI - dist);
     }
 
 
-    private static int getR(int rgb){
+    private int getR(int rgb){
         return (rgb >> 16) & 0xFF;
     }
 
-    private static int getG(int rgb){
+    private int getG(int rgb){
         return (rgb >> 8) & 0xFF;
     }
 
-    private static int getB(int rgb){
+    private int getB(int rgb){
         return rgb & 0xFF;
     }
 }

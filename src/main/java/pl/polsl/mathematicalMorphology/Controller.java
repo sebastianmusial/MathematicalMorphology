@@ -61,7 +61,7 @@ public class Controller {
 		filterChooser
 				.getValue()
 				.withImage(imgLeft.getImage())
-				.filter()
+				.filter((float) hrefSlider.getValue())
 				.setImage(imgRight);
 		btnAcceptFilter.setDisable(false);
 	}
