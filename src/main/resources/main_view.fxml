@@ -73,7 +73,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                       <Button fx:id="btnAcceptFilter" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleAcceptFilter" prefHeight="25.0" prefWidth="165.0" text="Akceptuj" GridPane.rowIndex="1">
+                   <Button fx:id="btnAcceptFilter" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleAcceptFilter" prefHeight="25.0" prefWidth="165.0" text="Akceptuj" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>

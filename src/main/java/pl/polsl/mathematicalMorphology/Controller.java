@@ -45,6 +45,10 @@ public class Controller {
 		filterChooser.setValue(filters.get(0));
 		extensionFilter = new FileChooser.ExtensionFilter("Obrazki", ".jpg", ".jpeg", ".bmp", ".png");
 		btnAcceptFilter.setDisable(true);
+
+		hrefSlider.setStyle("-fx-background-image: url('hue-slider.png'); -fx-background-repeat: no-repeat; -fx-background-size: contain;");
+		hrefSlider.setShowTickMarks(false);
+		hrefSlider.setShowTickLabels(false);
 	}
 
 	@FXML
