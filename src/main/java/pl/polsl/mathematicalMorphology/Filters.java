@@ -11,10 +11,178 @@ public final class Filters extends ArrayList<Filter> {
 	private static Filters filters;
 
 	private Filters() {
-		add(new Erosion3x3());
-		add(new Erosion5x5());
-		add(new Dilation3x3());
-		add(new Dilation5x5());
+
+		// ---------------------
+		// erozja 3x3
+		// ---------------------
+		add(new Erosion3x3(
+				"Erozja 3x3 - el. str. same jedynki",
+				new int[][] {
+					{1, 1, 1},
+					{1, 1, 1},
+					{1, 1, 1}
+				}
+		));
+
+		add(new Erosion3x3(
+				"Erozja 3x3 - el. str. 'plus'",
+				new int[][] {
+					{0, 1, 0},
+					{1, 1, 1},
+					{0, 1, 0}
+			}
+		));
+
+		add(new Erosion3x3(
+				"Erozja 3x3 - el. str. 'minus'",
+				new int[][] {
+					{0, 0, 0},
+					{1, 1, 1},
+					{0, 0, 0}
+				}
+		));
+
+		add(new Erosion3x3(
+				"Erozja 3x3 - el. str. 'kreska'",
+				new int[][] {
+						{0, 1, 0},
+						{0, 1, 0},
+						{0, 1, 0}
+				}
+		));
+
+		// ---------------------
+		// erozja 5x5
+		// ---------------------
+		add(new Erosion5x5(
+				"Erozja 5x5 - el. str. 'same jedynki'",
+				new int[][] {
+						{1, 1, 1, 1, 1},
+						{1, 1, 1, 1, 1},
+						{1, 1, 1, 1, 1},
+						{1, 1, 1, 1, 1},
+						{1, 1, 1, 1, 1}
+				}
+		));
+
+		add(new Erosion5x5(
+				"Erozja 5x5 - el. str. 'plus'",
+				new int[][] {
+						{0, 0, 1, 0, 0},
+						{0, 0, 1, 0, 0},
+						{1, 1, 1, 1, 1},
+						{0, 0, 1, 0, 0},
+						{0, 0, 1, 0, 0}
+				}
+		));
+
+		add(new Erosion5x5(
+				"Erozja 5x5 - el. str. 'minus'",
+				new int[][] {
+						{0, 0, 0, 0, 0},
+						{0, 0, 0, 0, 0},
+						{1, 1, 1, 1, 1},
+						{0, 0, 0, 0, 0},
+						{0, 0, 0, 0, 0}
+				}
+		));
+
+		add(new Erosion5x5(
+				"Erozja 5x5 - el. str. 'kreska'",
+				new int[][] {
+						{0, 0, 1, 0, 0},
+						{0, 0, 1, 0, 0},
+						{0, 0, 1, 0, 0},
+						{0, 0, 1, 0, 0},
+						{0, 0, 1, 0, 0}
+				}
+		));
+
+		// ---------------------
+		// dylatacja 3x3
+		// ---------------------
+		add(new Dilation3x3(
+				"Dylatacja 3x3 - el. str. same jedynki",
+				new int[][] {
+						{1, 1, 1},
+						{1, 1, 1},
+						{1, 1, 1}
+				}
+		));
+
+		add(new Dilation3x3(
+				"Dylatacja 3x3 - el. str. 'plus'",
+				new int[][] {
+						{0, 1, 0},
+						{1, 1, 1},
+						{0, 1, 0}
+				}
+		));
+
+		add(new Dilation3x3(
+				"Dylatacja 3x3 - el. str. 'minus'",
+				new int[][] {
+						{0, 0, 0},
+						{1, 1, 1},
+						{0, 0, 0}
+				}
+		));
+
+		add(new Dilation3x3(
+				"Dylatacja 3x3 - el. str. 'kreska'",
+				new int[][] {
+						{0, 1, 0},
+						{0, 1, 0},
+						{0, 1, 0}
+				}
+		));
+
+		// ---------------------
+		// dylatacja 5x5
+		// ---------------------
+		add(new Dilation5x5(
+				"Dylatacja 5x5 - el. str. 'same jedynki'",
+				new int[][] {
+						{1, 1, 1, 1, 1},
+						{1, 1, 1, 1, 1},
+						{1, 1, 1, 1, 1},
+						{1, 1, 1, 1, 1},
+						{1, 1, 1, 1, 1}
+				}
+		));
+
+		add(new Dilation5x5(
+				"Dylatacja 5x5 - el. str. 'plus'",
+				new int[][] {
+						{0, 0, 1, 0, 0},
+						{0, 0, 1, 0, 0},
+						{1, 1, 1, 1, 1},
+						{0, 0, 1, 0, 0},
+						{0, 0, 1, 0, 0}
+				}
+		));
+
+		add(new Dilation5x5(
+				"Dylatacja 5x5 - el. str. 'minus'",
+				new int[][] {
+						{0, 0, 0, 0, 0},
+						{0, 0, 0, 0, 0},
+						{1, 1, 1, 1, 1},
+						{0, 0, 0, 0, 0},
+						{0, 0, 0, 0, 0}
+				}
+		));
+
+		add(new Dilation5x5(
+				"Dylatacja 5x5 - el. str. 'kreska'",
+				new int[][] {
+						{0, 0, 1, 0, 0},
+						{0, 0, 1, 0, 0},
+						{0, 0, 1, 0, 0},
+						{0, 0, 1, 0, 0},
+						{0, 0, 1, 0, 0}
+				}
+		));
 	}
 
 	public static Filters getFilters() {

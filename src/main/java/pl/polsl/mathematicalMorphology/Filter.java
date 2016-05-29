@@ -43,16 +43,8 @@ class RGB2HSI extends Filter {
 }
 
 class Erosion3x3 extends Filter {
-	public Erosion3x3() {
-		super(
-				"Erozja 3x3",
-				new int[][]{
-						{1, 1, 1},
-						{1, 1, 1},
-						{1, 1, 1}
-				}
-		);
-
+	public Erosion3x3(String name, int[][] elem) {
+		super(name, elem);
 		pixelProcedure = erosionPixelFilter;
 	}
 
@@ -65,18 +57,8 @@ class Erosion3x3 extends Filter {
 }
 
 class Erosion5x5 extends Filter {
-	public Erosion5x5() {
-		super(
-				"Erozja 5x5",
-				new int[][]{
-						{1, 1, 1, 1, 1},
-						{1, 1, 1, 1, 1},
-						{1, 1, 1, 1, 1},
-						{1, 1, 1, 1, 1},
-						{1, 1, 1, 1, 1}
-				}
-		);
-
+	public Erosion5x5(String name, int[][] elem) {
+		super(name, elem);
 		pixelProcedure = erosionPixelFilter;
 	}
 
@@ -89,15 +71,8 @@ class Erosion5x5 extends Filter {
 }
 
 class Dilation3x3 extends Filter {
-	public Dilation3x3() {
-		super(
-				"Dylatacja 3x3",
-				new int[][]{
-						{1, 1, 1},
-						{1, 1, 1},
-						{1, 1, 1}
-				}
-		);
+	public Dilation3x3(String name, int[][] elem) {
+		super(name, elem);
 		pixelProcedure = dilationPixelFilter;
 	}
 
@@ -110,17 +85,8 @@ class Dilation3x3 extends Filter {
 }
 
 class Dilation5x5 extends Filter {
-	public Dilation5x5() {
-		super(
-				"Dylatacja 5x5",
-				new int[][]{
-						{1, 1, 1, 1, 1},
-						{1, 1, 1, 1, 1},
-						{1, 1, 1, 1, 1},
-						{1, 1, 1, 1, 1},
-						{1, 1, 1, 1, 1}
-				}
-		);
+	public Dilation5x5(String name, int[][] elem) {
+		super(name, elem);
 		pixelProcedure = dilationPixelFilter;
 	}
 

@@ -28,10 +28,6 @@ public class Controller {
 	ComboBox<Filter> filterChooser;
     @FXML
     TextField inpFileName;
-    @FXML
-    TextArea resultsArea;
-    @FXML
-    Label resultsLabel;
 	@FXML
 	Slider hrefSlider;
 
@@ -48,7 +44,6 @@ public class Controller {
 		}
 		filterChooser.setValue(filters.get(0));
 		extensionFilter = new FileChooser.ExtensionFilter("Obrazki", ".jpg", ".jpeg", ".bmp", ".png");
-		resultsArea.setEditable(false);
 		btnAcceptFilter.setDisable(true);
 	}
 
@@ -66,7 +61,6 @@ public class Controller {
     void handleAcceptFilter() {
 		if(imgRight.getImage() != null) {
 			String filterName = filterChooser.getValue().toString();
-			resultsArea.appendText(acceptIterator + ". " + filterName + "\n");
 			imgLeft.setImage(imgRight.getImage());
 			imgRight.setImage(null);
 			acceptIterator++;
@@ -117,7 +111,6 @@ public class Controller {
 		imgLeft.setImage(new Image(uri));
 
 		enableButtons(true);
-		resultsArea.setText("");
 		acceptIterator = 1;
 	}
 
@@ -133,9 +126,7 @@ public class Controller {
 		btnApplyFilter.setDisable(disable);
 		filterChooser.setDisable(disable);
         inpFileName.setDisable(disable);
-        resultsLabel.setDisable(disable);
         btnSaveImage.setDisable(disable);
-		resultsArea.setDisable(disable);
 		hrefSlider.setDisable(disable);
 	}
 
