@@ -64,6 +64,7 @@ public class Controller {
 				.filter((float) hrefSlider.getValue())
 				.setImage(imgRight);
 		btnAcceptFilter.setDisable(false);
+		System.out.printf("H-ref: " + Double.toString(hrefSlider.getValue()) + "\n");
 	}
 
     @FXML
