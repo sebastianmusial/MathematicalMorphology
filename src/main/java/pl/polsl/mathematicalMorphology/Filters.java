@@ -43,7 +43,7 @@ public final class Filters extends ArrayList<Filter> {
 		));
 
 		add(new Erosion3x3(
-				"Erozja 3x3 - el. str. 'kreska'",
+				"Erozja 3x3 - el. str. 'pionowa kreska'",
 				new int[][] {
 						{0, 1, 0},
 						{0, 1, 0},
@@ -88,7 +88,7 @@ public final class Filters extends ArrayList<Filter> {
 		));
 
 		add(new Erosion5x5(
-				"Erozja 5x5 - el. str. 'kreska'",
+				"Erozja 5x5 - el. str. 'pionowa kreska'",
 				new int[][] {
 						{0, 0, 1, 0, 0},
 						{0, 0, 1, 0, 0},
@@ -129,7 +129,7 @@ public final class Filters extends ArrayList<Filter> {
 		));
 
 		add(new Dilation3x3(
-				"Dylatacja 3x3 - el. str. 'kreska'",
+				"Dylatacja 3x3 - el. str. 'pionowa kreska'",
 				new int[][] {
 						{0, 1, 0},
 						{0, 1, 0},
@@ -174,7 +174,7 @@ public final class Filters extends ArrayList<Filter> {
 		));
 
 		add(new Dilation5x5(
-				"Dylatacja 5x5 - el. str. 'kreska'",
+				"Dylatacja 5x5 - el. str. 'pionowa kreska'",
 				new int[][] {
 						{0, 0, 1, 0, 0},
 						{0, 0, 1, 0, 0},
